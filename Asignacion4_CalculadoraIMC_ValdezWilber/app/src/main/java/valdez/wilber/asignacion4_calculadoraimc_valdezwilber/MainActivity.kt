@@ -11,7 +11,6 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    // Declarar las variables que representan a los elementos de la interfaz gráfica
     private lateinit var weightEditText: EditText
     private lateinit var heightEditText: EditText
     private lateinit var calculateButton: Button
@@ -29,14 +28,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        weightEditText = findViewById(R.id.weight) //
-        heightEditText = findViewById(R.id.height) //
-        calculateButton = findViewById(R.id.btnCalcular) //
-        imcTextView = findViewById(R.id.imc) //
-        rangeTextView = findViewById(R.id.range) //
+        weightEditText = findViewById(R.id.weight)
+        heightEditText = findViewById(R.id.height)
+        calculateButton = findViewById(R.id.btnCalcular)
+        imcTextView = findViewById(R.id.imc)
+        rangeTextView = findViewById(R.id.range)
 
-        calculateButton.setOnClickListener { //
-            calculateAndDisplayIMC() //
+        calculateButton.setOnClickListener {
+            calculateAndDisplayIMC()
         }
 
     }
@@ -49,48 +48,49 @@ class MainActivity : AppCompatActivity() {
         if (weightString.isNullOrEmpty() || heightString.isNullOrEmpty()) {
             imcTextView.text = "Ingresa peso y altura"
             rangeTextView.text = ""
-            rangeTextView.setBackgroundResource(android.R.color.transparent) // Limpiar el color de fondo
+            rangeTextView.setBackgroundResource(android.R.color.transparent)
             return
         }
 
         // convierte a numeros float pa que no haya errores
         val weight = weightString.toFloat()
-        val height = heightString.toFloat() / 100 // Convertir altura de cm a metros
+        val height = heightString.toFloat() / 100
 
         // aqui calcula el IMC
-        val imc = weight / (height * height) //
-        imcTextView.text = String.format("%.5f", imc) // Desplegar el IMC con 5 decimales
+        val imc = weight / (height * height)
+        imcTextView.text = String.format("%.5f", imc)
 
         var category = ""
         var colorResId: Int = android.R.color.transparent
 
         when {
             imc < 18.5 -> {
-                category = "Bajo peso" //
-                colorResId = R.color.colorBrown //
+                category = "Bajo peso"
+                colorResId = R.color.colorBrown
             }
             imc >= 18.5 && imc <= 24.9 -> {
-                category = "Normal" //
-                colorResId = R.color.colorGreen //
+                category = "Normal"
+                colorResId = R.color.colorGreen
             }
             imc >= 25 && imc <= 29.9 -> {
-                category = "Sobrepeso" //
-                colorResId = R.color.colorYellow //
+                category = "Sobrepeso"
+                colorResId = R.color.colorYellow
             }
             imc >= 30 && imc <= 34.9 -> {
-                category = "Obesidad grado 1" //
-                colorResId = R.color.colorOrange //
+                category = "Obesidad grado 1"
+                colorResId = R.color.colorOrange
             }
             imc >= 35 && imc <= 39.9 -> {
-                category = "Obesidad grado 2" //
-                colorResId = R.color.colorRed //
+                category = "Obesidad grado 2"
+                colorResId = R.color.colorRed
             }
             imc >= 40 -> {
-                category = "Obesidad grado 3" //
-                colorResId = R.color.colorRed //
+                category = "Obesidad grado 3"
+                colorResId = R.color.colorRed
             }
         }
-        rangeTextView.text = category //
-        rangeTextView.setBackgroundResource(colorResId) // Cambiar el color de fondo de la etiqueta de rango
+        rangeTextView.text = category
+        rangeTextView.setBackgroundResource(colorResId)
+
     }
 }
